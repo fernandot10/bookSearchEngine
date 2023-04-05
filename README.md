@@ -26,7 +26,7 @@
   ## Usage
 
   - [REPO](https://github.com/fernandot10/Book-Search-Engine)
-  - [DEPLOYED]()
+  - [DEPLOYED](https://fernandot10.github.io/Book-Search-Engine/)
 
   ## License 
   MIT
