@@ -7,16 +7,16 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
+import { useMutation, useQuery } from '@apollo/client';
 import { REMOVE_BOOK } from '../utils/mutations'
 
 const SavedBooks = () => {
+  const [removeBook] = useMutation(REMOVE_BOOK);
   const { loading, data } = useQuery(GET_ME);
   let userData = data?.me || {};
-  const [removeBook] = useMutation(REMOVE_BOOK);
 
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -27,12 +27,8 @@ const SavedBooks = () => {
 
     try {
       const { data } = await removeBook({ variables: { bookId } });
-
-      if (!data) {
-        throw new Error('something went wrong!');
-      }
-
       removeBookId(bookId);
+
     } catch (err) {
       console.error(err);
     }
@@ -43,7 +39,7 @@ const SavedBooks = () => {
   }
   return (
     <>
-      <div fluid className="text-light bg-dark p-5">
+      <div fluid className="bg-dark">
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>
